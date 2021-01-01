@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!-- CSS -->
+<link rel="stylesheet" href="css/bootstrap.min.css" />
+
+<!-- JS -->
+<script src="js/angular.js"></script>
+<script src="js/app.js"></script>
+</head>
+<body ng-app="validationApp" ng-controller="mainController">
+    <div class="container">
+
+        <!-- =================================================================== -->
+        <!-- FORM ============================================================== -->
+        <!-- =================================================================== -->
+
+        <!-- pass in the variable if our form is valid or invalid -->
+        <form action="AfterFormServlet" method="POST" name="userForm"
+            ng-submit="submitForm(userForm.$valid)" novalidate>
+
+            <!-- FIRST NAME -->
+            <div class="form-group"
+                ng-class="{ 'has-error' : userForm.name.$invalid && !userForm.name.$pristine }">
+                <label>First name</label> <input type="text" name="name"
+                    class="form-control" ng-model="user.name"
+                    ng-pattern="/^[a-z ,.'-]+$/i" required>
+                <p ng-show="userForm.name.$invalid && !userForm.name.$pristine"
+                    class="help-block">Enter a valid last first name.</p>
+            </div>    
+            <button type="submit" class="btn btn-primary">Submit</button>    
+        </form>    
+    </div>
+</body>
+</html>
